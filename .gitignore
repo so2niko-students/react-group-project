@@ -22,7 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-# User-specific files
 *.suo
 *.user
 *.userosscache
