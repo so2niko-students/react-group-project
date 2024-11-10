@@ -1,0 +1,28 @@
+install nodejs
+npm install -g yarn
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser (if it's needed)
+
+yarn create vite  (projectname.client)
+cd projectname.client
+yarn install (resolve all dependenciews)
+(yarn start)
+
+mkdir projectname.server
+cd projectname.server
+(dotnet run)
+check if server is alive with windows 'netstat -ano | findstr :port'/linux 'lsof -i :port' where port is port of your server
+
+cd to the root folder
+yarn add concurrently
+
+update package.json of the root with
+"scripts": {
+    "backend": "cd react-group-project.server && dotnet run", where react-group-project.server and react-group-project.client corresponding folders
+    "frontend": "yarn --cwd react-group-project.client vite",
+    "dev": "concurrently \"yarn backend\" \"yarn frontend\""
+  }
+
+to resolve CORS (Cross-Origin Resource Sharing) add proxy to package.json of client
+"proxy": "http://localhost:5176"
+
+
