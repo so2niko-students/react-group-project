@@ -1,0 +1,18 @@
+install nodejs
+npm install -g yarn
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser (if it's needed)
+
+yarn create vite  (projectname.client)
+cd projectname.client
+yarn install (resolve all dependenciews)
+(yarn start)
+
+mkdir projectname.server
+cd projectname.server
+(dotnet run)
+check if server is alive with windows 'netstat -ano | findstr :port'/linux 'lsof -i :port' where port is port of your server
+
+cd to the root folder
+yarn add concurrently
+
+
