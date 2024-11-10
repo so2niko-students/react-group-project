@@ -1,0 +1,6 @@
+@react_group_project.server_HostAddress = http://localhost:5176
+
+GET {{react_group_project.server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
