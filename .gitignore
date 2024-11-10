@@ -63,3 +63,5 @@ build/
 *.sln.ide
 *.vsconfig
 .vs/
+obj/
+bin/
