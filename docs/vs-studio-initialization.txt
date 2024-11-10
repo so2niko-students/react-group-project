@@ -1,0 +1,5 @@
+1. Create project react+asp net core
+2. fix vite.config.js  https://stackoverflow.com/questions/79148729/asp-net-core-development-certificates-error-exporting-the-https-developer-cert
+3. Exclude .vscode folder from projectName.client/.gitignore
+4. Commit solution
+
