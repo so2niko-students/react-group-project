@@ -1,6 +1,7 @@
 import { Layout } from "./Layout";
 import { createBrowserRouter } from "react-router-dom";
 import Error from "./error";
+import Home from "./Home"
 
 export const router= createBrowserRouter([
     {
@@ -9,7 +10,7 @@ export const router= createBrowserRouter([
         errorElement: <Error />,
         children:[
             {
-                element: <>Home</>,
+                element: <Home/>,
                 index: true
             },
             {
