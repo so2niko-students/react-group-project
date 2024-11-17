@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "concurrently": "^9.1.0",
+    "react-router-dom": "^6.28.0"
+  },
+  "scripts": {
+    "backend": "cd react-group-project.server && dotnet run",
+    "frontend": "yarn --cwd react-group-project.client vite",
+    "dev": "concurrently \"yarn backend\" \"yarn frontend\""
+  }
+}
