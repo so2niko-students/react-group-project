@@ -1,5 +1,6 @@
 export const items = [
     {
+        id:"1",
         title: "title1",
         description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         authorName: "author name1",
@@ -7,6 +8,7 @@ export const items = [
         img: "src/images/img1.jpg"
     },
     {
+        id: "2",
         title: "title2",
         description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         authorName: "author name2",
