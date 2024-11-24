@@ -1,6 +1,6 @@
 @react_group_project.Server_HostAddress = http://localhost:5201
 
-GET {{react_group_project.Server_HostAddress}}/weatherforecast/
+GET {{react_group_project.Server_HostAddress}}/postItems/
 Accept: application/json
 
 ###
