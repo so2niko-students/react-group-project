@@ -21,13 +21,14 @@ namespace react_group_project.Server.Controllers
         [HttpGet(Name = "GetPostItems")]
         public async Task<IEnumerable<PostItem>> Get()
         {
-            return await _DataBaseContext.PostItems.ToListAsync();
+            var res = await _DataBaseContext.PostItems.Include(x => x.Creator).ThenInclude(x => x.UserGroup).ThenInclude(x => x.Permissions).AsNoTracking().ToListAsync();
+            return res;
         }
 
         [HttpGet("{id}", Name = "GetPostItem")]
         public async Task<ActionResult<PostItem>> Get(int id)
         {
-            var postItem = await _DataBaseContext.PostItems.FirstOrDefaultAsync(x => x.Id == id);
+            var postItem = await _DataBaseContext.PostItems.Include(x => x.Creator).FirstOrDefaultAsync(x => x.Id == id);
 
             if (postItem != null) return postItem;
             return NotFound();

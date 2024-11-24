@@ -29,10 +29,29 @@ namespace react_group_project.Server.DatabaseProviders
             );
 
             modelBuilder.Entity<UserGroup>().HasData(
-            new UserGroup { Id = 1, Name = "Admin" },
-            new UserGroup { Id = 2, Name = "General" },
-            new UserGroup { Id = 3, Name = "Extended" }
+                new UserGroup { Id = 1, Name = "Admin" , Permissions = new List<Permission> () },
+                new UserGroup { Id = 2, Name = "General" },
+                new UserGroup { Id = 3, Name = "Extended" }
             );
+
+            modelBuilder.Entity<UserGroup>()
+            .HasMany<Permission>()
+            .WithMany("UserGroup")
+            .UsingEntity<Dictionary<string, object>>(
+                "PermissionUserGroup",
+                j => j.HasData(
+                    new { UserGroupId = 1, PermissionId = 1 },
+                    new { UserGroupId = 1, PermissionId = 2 },
+                    new { UserGroupId = 1, PermissionId = 3 },
+                    new { UserGroupId = 1, PermissionId = 4 },
+
+                    new { UserGroupId = 2, PermissionId = 1 },
+                    new { UserGroupId = 2, PermissionId = 2 },
+
+                    new { UserGroupId = 3, PermissionId = 1 },
+                    new { UserGroupId = 3, PermissionId = 2 },
+                    new { UserGroupId = 3, PermissionId = 3 }
+                ));
 
             modelBuilder.Entity<User>().HasData(
                new User { Id = 1, Login = "viktor", Name = "Viktor Ponomarenko", UserGroupId = 1 },
