@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "concurrently": "^9.1.0"
+  },
+  "scripts": {
+    "backend": "cd react-group-project.server && dotnet run",
+    "frontend": "yarn --cwd react-group-project.client dev",
+    "dev": "concurrently \"yarn backend\" \"yarn frontend\""
+  }
+}
