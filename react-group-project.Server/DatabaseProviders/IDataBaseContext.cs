@@ -5,9 +5,9 @@ namespace react_group_project.Server.DatabaseProviders
 {
     public interface IDataBaseContext
     {
-        public DbSet<User> Users { get;}
-        public DbSet<PostItem> PostItems { get; }
-        public DbSet<UserGroup> UserGroups { get;  }
-        public DbSet<Permission> Permissions { get; }
+        DbSet<User> Users { get;}
+        DbSet<PostItem> PostItems { get; }
+        DbSet<UserGroup> UserGroups { get;  }
+        DbSet<Permission> Permissions { get; }
     }
 }

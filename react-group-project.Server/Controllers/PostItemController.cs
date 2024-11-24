@@ -1,4 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using react_group_project.Server.DatabaseProviders;
+using react_group_project.Server.Models;
 
 namespace react_group_project.Server.Controllers
 {
@@ -6,28 +9,28 @@ namespace react_group_project.Server.Controllers
     [Route("[controller]")]
     public class PostItemController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
         private readonly ILogger<PostItemController> _logger;
+        private readonly IDataBaseContext _DataBaseContext = null!;
 
-        public PostItemController(ILogger<PostItemController> logger)
+        public PostItemController(IDataBaseContext dataBaseContext, ILogger<PostItemController> logger)
         {
             _logger = logger;
+            _DataBaseContext = dataBaseContext;
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
+        [HttpGet(Name = "GetPostItems")]
+        public async Task<IEnumerable<PostItem>> Get()
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+            return await _DataBaseContext.PostItems.ToListAsync();
+        }
+
+        [HttpGet("{id}", Name = "GetPostItem")]
+        public async Task<ActionResult<PostItem>> Get(int id)
+        {
+            var postItem = await _DataBaseContext.PostItems.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (postItem != null) return postItem;
+            return NotFound();
         }
     }
 }
