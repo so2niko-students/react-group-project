@@ -6,5 +6,8 @@
     "backend": "cd react-group-project.server && dotnet run",
     "frontend": "yarn --cwd react-group-project.client dev",
     "dev": "concurrently \"yarn backend\" \"yarn frontend\""
+  },
+  "devDependencies": {
+    "wait-on": "^8.0.1"
   }
 }
