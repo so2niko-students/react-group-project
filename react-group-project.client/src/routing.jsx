@@ -1,7 +1,8 @@
-import { Layout } from "./Layout";
+import { Layout } from "./components/layout/layout";
 import { createBrowserRouter } from "react-router-dom";
-import Error from "./error";
-import Home from "./pages/home/index"
+import Error from "./components/error/error";
+import Home from "./pages/home/"
+import PostDetail from "./pages/post_detail/";
 
 export const router= createBrowserRouter([
     {
@@ -15,7 +16,7 @@ export const router= createBrowserRouter([
             },
             {
                 path: "/post/:postID",
-                element: <>Post</>
+                element: <PostDetail/>
             },
             {
                 path: "/create",
