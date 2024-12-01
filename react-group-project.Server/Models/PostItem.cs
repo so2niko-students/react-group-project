@@ -22,6 +22,8 @@ namespace react_group_project.Server.Models
         public virtual User Creator { get; set; } = null!;
 
         [Required]
-        public required DateTime CreatDateTime { get; set; }
+        public required DateTime CreateDateTime { get; set; }
+
+        public string? ImageLink { get; set; }
     }
 }

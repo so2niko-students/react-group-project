@@ -10,7 +10,6 @@ namespace react_group_project.Server.Models
         [Required]
         public required string Name { get; set; }
 
-        [Required]
         public List<Permission> Permissions { get; set; } = new List<Permission>();
     }
 }

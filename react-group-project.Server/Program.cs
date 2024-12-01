@@ -52,7 +52,7 @@ public static class Program
         services.AddSwaggerGen();
 
         services.AddDbContext<IDataBaseContext, ApplicationDbContext>(options =>
-            options.UseMySQL("Server=10.106.110.124;Port=3306;Database=postItem;User=postItem;Password=postItemUser_12692;"));
+            options.UseSqlServer("Server=localhost;Database=postItem;Trusted_Connection=True;TrustServerCertificate=True;"));
     }
 }
 

@@ -1,36 +1,14 @@
 import PostList from "../../components/PostList";
-import { useEffect, useState } from 'react';
+import { useFetchPosts } from "../../httpClient/httpClient.jsx";
 
 export default function Home() {
 
-    const [posts, setPosts] = useState();
-    populatePosts();
-    
-
-
-    
-
+    const { data: posts, loading, error } = useFetchPosts("postitem");
     return (
-
-        
         <div className="container d-flex justify-content-center flex-column">
-            <PostList  />
+            {loading && <p>Loading...</p>}
+            {error && <p className="text-danger">Error: {error}</p>}
+            {!loading && !error && <PostList items={posts} />}
         </div>
     )
-
-    async function populatePosts() {
-        const response = await fetch('postitem');
-        const data = await response.json();
-        console.log(data);
-
-        let items = data.map(p => ({
-            id: p.Id,
-            title: p.Title,
-            description: p.ShortDescription,
-            authorName: p.Creator.Login,
-            dateOfCreation: p.CreateDateTime
-        }));
-
-        setPosts(items);
-    }
 }

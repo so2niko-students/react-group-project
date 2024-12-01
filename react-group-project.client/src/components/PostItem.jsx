@@ -12,7 +12,7 @@ export default function PostItem({ item = {} }) {
                         <div>{item.dateOfCreation}</div>
                     </div>
                     <div className="col-4 d-flex justify-content-center align-items-center">
-                        <img src={item.img} />
+                        <img src={item.imageLink} />
                     </div>
                 </div>
             </div>
