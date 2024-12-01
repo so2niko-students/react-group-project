@@ -1,11 +1,16 @@
 import axios from "axios";
+export async function getAllPosts() {
+    try
+    { 
+        const postItems = "postItems";
 
-export function getAllPosts() {
-    const postItems = "postItems";
+        const url_postItems = `${postItems}`;
 
-    const url_postItems = `${postItems}`;
+        const response = await axios.get(url_postItems)
 
-    axios.get(url_postItems).then(function (response) {
-        console.log(response);
-    })
+        return response.data;
+    }
+    catch (error) {
+        console.error(error);
+    }
 }

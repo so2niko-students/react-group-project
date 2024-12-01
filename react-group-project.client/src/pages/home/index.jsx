@@ -1,19 +1,17 @@
 import PostList from "../../components/post_list/post_list"
-//import { items } from "../../data"
 import { useEffect, useState } from 'react';
+import { getAllPosts } from "../../services/posts";
 
 export default function Home() {
     const [items, setItems] = useState();
 
     useEffect(() => {
-        getItems();
+        async function getPosts() {
+            const data = await getAllPosts();
+            setItems(data);
+        }
+        getPosts();
     }, []);
-
-    async function getItems() {
-        const response = await fetch('postItems');
-        const items = await response.json();
-        setItems(items);
-    }
 
     return (
         <div className="container d-flex justify-content-center flex-column">
