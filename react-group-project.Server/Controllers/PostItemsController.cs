@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using react_group_project.Server.Data;
 using react_group_project.Server.Models;
 
@@ -38,10 +39,18 @@ namespace react_group_project.Server.Controllers
             }
         }
 
-        [HttpGet(Name = "PostItems")]
-        public IEnumerable<PostItem> Get()
+        [HttpGet]
+        public async Task<IEnumerable<PostItem>> Get()
         {
-            return db.PostItems.ToList();
+            return await db.PostItems.ToListAsync();
+        }
+
+        [HttpGet("{id}")]
+        public async Task<PostItem> Get(int id)
+        {
+            var item =  await db.PostItems.FirstOrDefaultAsync(x => x.Id == id);
+
+            return item;
         }
     }
 }
