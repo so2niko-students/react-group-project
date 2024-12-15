@@ -1,10 +1,10 @@
 import axios  from "axios";
 
-export async function getPosts() {
-    let posts = null;
+export async function getItems(url) {
+    let data = null;
     let error = null;
     try {
-        const response = await axios.get("postitem");
+        const response = await axios.get(url);
 
         const formattedData = response.data.map(p => ({
             id: p.id,
@@ -15,19 +15,19 @@ export async function getPosts() {
             imageLink: p.imageLink
         }));
 
-        posts = formattedData;
+        data = formattedData;
     } catch (err) {
-        return { posts: null, error: err.message };
+        return { data: null, error: err.message };
     }
     
-    return { posts, error };
+    return { data, error };
 }
 
-export async function getPost(postId) {
-    let post = null;
+export async function getItem(url) {
+    let data = null;
     let error = null;
     try {
-        const response = await axios.get(`/postitem/${postId}`);
+        const response = await axios.get(url);
         const result = response.data;
         
         const formattedData = {
@@ -39,10 +39,10 @@ export async function getPost(postId) {
             imageLink: result.imageLink
         };
 
-        post = formattedData;
+        data = formattedData;
     } catch (err) {
-        return { post: null, error: err.message };
+        return { data: null, error: err.message };
     }
 
-    return { post, error };
+    return { data, error };
 }

@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { getPost } from "../../httpClient/httpClient.jsx";
+import { getPost } from "../../httpClients/PostItemClient.jsx";
 import { useState, useEffect } from "react";
 
 const PostDetails = () => {

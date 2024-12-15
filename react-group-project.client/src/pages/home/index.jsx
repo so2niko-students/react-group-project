@@ -1,5 +1,5 @@
 import PostList from "../../components/PostList";
-import { getPosts } from "../../httpClient/httpClient.jsx";
+import { getPosts } from "../../httpClients/PostItemClient.jsx";
 import { useState, useEffect } from "react";
 
 export default function Home() {
