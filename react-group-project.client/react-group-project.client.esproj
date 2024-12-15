@@ -12,7 +12,4 @@
     <None Remove="src\images\**" />
     <TypeScriptConfiguration Remove="src\images\**" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="src\components\" />
-  </ItemGroup>
 </Project>

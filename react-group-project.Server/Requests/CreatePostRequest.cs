@@ -1,13 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using react_group_project.Server.Models;
+using System.ComponentModel.DataAnnotations;
 
-namespace react_group_project.Server.Models
+namespace react_group_project.Server.Requests
 {
-    public class PostItem
+    public class CreatePostRequest
     {
-        [Key]
-        public int Id { get; set; }
-
         [Required]
         public required string Title { get; set; }
 
@@ -19,11 +16,9 @@ namespace react_group_project.Server.Models
         [Required]
         public virtual int CreatorId { get; set; }
 
-        public virtual User Creator { get; set; } = null!;
-
         [Required]
         public required DateTime CreateDateTime { get; set; }
 
-        public string? ImageLink { get; set; }
+        public IFormFile? Image { get; set; }
     }
 }

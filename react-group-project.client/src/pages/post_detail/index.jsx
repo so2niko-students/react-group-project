@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { getPost } from "../../httpClients/PostItemClient.jsx";
 import { useState, useEffect } from "react";
+import PostDetailsContent from "../../components/PostDetailsContent.jsx";
 
 const PostDetails = () => {
     const { postId } = useParams();
@@ -23,15 +24,15 @@ const PostDetails = () => {
         getData();
     }, [postId]);
 
+    if (loading)
+        return <p>Loading...</p>;
+
+    if (error)
+        return <p className="text-danger">Error: {error}</p>;
+
     return (
-        <div>
-            {loading && <p>Loading...</p>}
-            {error && <p className="text-danger">Error: {error}</p>}
-            {!loading && !error && <h1>Post Details</h1>}
-            {!loading && !error && <p>Post ID: {post.id}</p>}
-        </div>
+        <PostDetailsContent post={ post }/>
     );
 };
 
 export default PostDetails;
-

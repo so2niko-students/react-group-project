@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using react_group_project.Server.DatabaseProviders;
 using react_group_project.Server.Models;
+using react_group_project.Server.Requests;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace react_group_project.Server.Controllers
 {
@@ -32,6 +34,36 @@ namespace react_group_project.Server.Controllers
 
             if (postItem != null) return postItem;
             return NotFound();
+        }
+
+        [HttpPost(Name = "AddPostItem")]
+        public async Task<IActionResult> AddPost(CreatePostRequest postRequest)
+        {
+
+            var post = new PostItem()
+            {
+                Title = postRequest.Title,
+                ShortDescription = postRequest.ShortDescription,
+                FullText = postRequest.FullText,
+                CreatorId = postRequest.CreatorId,
+                CreateDateTime = postRequest.CreateDateTime,
+            };
+
+            if (postRequest.Image != null)
+            {
+                var filePath = Path.Combine("wwwroot", "images", "postItems", $"{postRequest.Image.FileName}");
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await postRequest.Image.CopyToAsync(stream);
+                }
+
+                post.ImageLink = Path.Combine("images", "postItems", postRequest.Image.FileName);
+            }
+
+            _DataBaseContext.PostItems.Add(post);
+            await _DataBaseContext.SaveChangesAsync();
+
+            return Ok(post);
         }
     }
 }

@@ -9,5 +9,6 @@ namespace react_group_project.Server.DatabaseProviders
         DbSet<PostItem> PostItems { get; }
         DbSet<UserGroup> UserGroups { get;  }
         DbSet<Permission> Permissions { get; }
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }
