@@ -12,13 +12,8 @@ export default function Home() {
             try {
                 setLoading(true);
                 let res = await getPosts();
-                if (res.error) {
-                    setError(res.error);
-                    setPosts([]); 
-                } else {
-                    setError(null);
-                    setPosts(res.posts);
-                }
+                setError(res.error);
+                setPosts(res.posts);
             }
             finally {
                 setLoading(false);

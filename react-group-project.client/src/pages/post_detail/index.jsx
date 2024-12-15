@@ -13,13 +13,8 @@ const PostDetails = () => {
             try {
                 setLoading(true);
                 let res = await getPost(postId);
-                if (res.error) {
-                    setError(res.error);
-                    setPost(null);
-                } else {
-                    setError(null);
-                    setPost(res.post);
-                }
+                setError(res.error);
+                setPost(res.post);
             }
             finally {
                 setLoading(false);

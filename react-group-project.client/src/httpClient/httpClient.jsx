@@ -1,15 +1,12 @@
+import axios  from "axios";
+
 export async function getPosts() {
     let posts = null;
     let error = null;
     try {
-        const response = await fetch("postitem");
+        const response = await axios.get("postitem");
 
-        if (!response.ok) {
-            throw new Error(`Server error: ${response.status} ${response.statusText}`);
-        }
-
-        const result = await response.json();
-        const formattedData = result.map(p => ({
+        const formattedData = response.data.map(p => ({
             id: p.id,
             title: p.title,
             description: p.shortDescription,
@@ -30,13 +27,9 @@ export async function getPost(postId) {
     let post = null;
     let error = null;
     try {
-        const response = await fetch(`/postitem/${postId}`);
-
-        if (!response.ok) {
-            throw new Error(`Server error: ${response.status} ${response.statusText}`);
-        }
-
-        const result = await response.json();
+        const response = await axios.get(`/postitem/${postId}`);
+        const result = response.data;
+        
         const formattedData = {
             id: result.id,
             title: result.title,
