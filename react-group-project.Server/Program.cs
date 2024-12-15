@@ -12,6 +12,7 @@ public static class Program
 
         ConfigureServices(builder.Services);
 
+
         var app = builder.Build();
 
         app.UseDefaultFiles();

@@ -1,10 +1,33 @@
 import { useParams } from 'react-router-dom';
-import { useFetchPost } from "../../httpClient/httpClient.jsx";
+import { getPost } from "../../httpClient/httpClient.jsx";
+import { useState, useEffect } from "react";
 
 const PostDetails = () => {
     const { postId } = useParams();
-    const { data: post, loading, error } = useFetchPost(`/postitem/${postId}`);
-    
+    const [post, setPost] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        async function getData() {
+            try {
+                setLoading(true);
+                let res = await getPost(postId);
+                if (res.error) {
+                    setError(res.error);
+                    setPost(null);
+                } else {
+                    setError(null);
+                    setPost(res.post);
+                }
+            }
+            finally {
+                setLoading(false);
+            }
+        }
+        getData();
+    }, [postId]);
+
     return (
         <div>
             {loading && <p>Loading...</p>}
