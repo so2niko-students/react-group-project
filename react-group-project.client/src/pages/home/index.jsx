@@ -1,9 +1,9 @@
-import PostList from "../../components/post_list/post_list"
 import { useEffect, useState } from 'react';
 import { getAllPosts } from "../../services/posts";
+import PostItem from '../../components/post_item/post_item';
 
 export default function Home() {
-    const [items, setItems] = useState();
+    const [items, setItems] = useState([]);
 
     useEffect(() => {
         async function getPosts() {
@@ -15,7 +15,7 @@ export default function Home() {
 
     return (
         <div className="container d-flex justify-content-center flex-column">
-            <PostList items={items} />
+            {items.map((item) => (<PostItem key={item.id} item={item} />))}
         </div>
     )
 }

@@ -4,7 +4,7 @@ import { getPost } from "../../services/post";
 
 export default function PostDetail() {
     const { postID } = useParams();
-    const [item, setItem] = useState();
+    const [item, setItem] = useState({});
 
     useEffect(() => {
         async function getOnePost() {
