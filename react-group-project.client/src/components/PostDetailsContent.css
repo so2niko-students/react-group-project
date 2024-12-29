@@ -1,0 +1,10 @@
+.postDetails-card {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.postDetails-cardImage {
+    max-width: 400px;
+    height: auto;
+    margin: 0 auto;
+}

@@ -1,11 +1,11 @@
-
 import { Card } from "react-bootstrap";
+import "./PostDetailsContent.css"
 
 export default function PostDetailsContent({ post }) {
     return (
-        <Card className="mb-3" style={{ maxWidth: "400px", margin: "0 auto" }}>
+        <Card className="mb-3 postDetails-card">
             {post.imageLink && (
-                <Card.Img variant="top" src={post.imageLink} alt={post.title} />
+                <Card.Img variant="top" src={post.imageLink} alt={post.title} className="postDetails-cardImage" />
             )}
             <Card.Body>
                 <Card.Title>{post.title}</Card.Title>
