@@ -101,7 +101,7 @@ function CreatePostItemComponent({ onCreate }) {
                             <img
                                 src={imagePreview}
                                 alt="Preview"
-                                style={{ width: "100%", maxHeight: "300px", objectFit: "cover" }}
+                                style={{ width: "100%", maxHeight: "400px", objectFit: "cover" }}
                             />
                         </div>
                     )}
