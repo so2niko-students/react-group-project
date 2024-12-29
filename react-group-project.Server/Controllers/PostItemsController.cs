@@ -52,5 +52,13 @@ namespace react_group_project.Server.Controllers
 
             return item;
         }
+
+        [HttpPost]
+        public async Task<PostItem> Post([FromBody] PostItemDTO postItemDTO)
+        {
+            
+
+            return new PostItem();
+        }
     }
 }

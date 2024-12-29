@@ -15,3 +15,5 @@ export const Layout = () => {
         </>
     )
 }
+
+//<NavLink to="/post/1"> ????????

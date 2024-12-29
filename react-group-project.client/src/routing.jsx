@@ -3,6 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Error from "./components/error/error";
 import Home from "./pages/home/"
 import PostDetail from "./pages/post_detail/";
+import CreatePost from "./pages/create_post/index";
 
 export const router= createBrowserRouter([
     {
@@ -20,7 +21,7 @@ export const router= createBrowserRouter([
             },
             {
                 path: "/create",
-                element: <>Create</>
+                element: <CreatePost/>
             }
         ]
     }
