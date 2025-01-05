@@ -11,7 +11,7 @@ export default function PostItem({ item = {} }) {
                         <span>{item.description}</span>
                         <Link to={`/post/${item.id}`}>... see more</Link>
                     </h6>
-                        <div className="card-text">{item.authorName}</div>
+                    <div className="card-text">{item.authorName} {item.authorLastName}</div>
                         <div>{item.dateOfCreation}</div>
                     </div>
                     <div className="col-4 d-flex justify-content-center align-items-center">

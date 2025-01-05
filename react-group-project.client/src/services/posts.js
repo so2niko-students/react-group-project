@@ -7,7 +7,7 @@ export async function getAllPosts() {
         const url_postItems = `${postItems}`;
 
         const response = await axios.get(url_postItems)
-
+        console.log(response.data);
         return response.data;
     }
     catch (error) {

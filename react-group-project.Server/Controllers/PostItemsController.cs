@@ -22,7 +22,8 @@ namespace react_group_project.Server.Controllers
                     Title = "Title44",
                     Description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
                     AuthorName = "author name1",
-                    dateOfCreation = "date of creation1",
+                    AuthorLastName = "author lastName1",
+                    DateOfCreation = "date of creation1",
                     Img = "src/images/img1.jpg"
                 });
 
@@ -30,8 +31,9 @@ namespace react_group_project.Server.Controllers
                 {
                     Title = "Title55",
                     Description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-                    AuthorName = "author name1",
-                    dateOfCreation = "date of creation1",
+                    AuthorName = "author name22",
+                    AuthorLastName = "author lastName22",
+                    DateOfCreation = "date of creation1",
                     Img = "src/images/img1.jpg"
                 });
 
@@ -54,11 +56,13 @@ namespace react_group_project.Server.Controllers
         }
 
         [HttpPost]
-        public async Task<PostItem> Post([FromBody] PostItemDTO postItemDTO)
+        public async Task<PostItem> Post([FromBody] PostItem postItem)
         {
-            
+            var result = db.PostItems.Add(postItem);
 
-            return new PostItem();
+            await db.SaveChangesAsync();
+
+            return result.Entity;
         }
     }
 }

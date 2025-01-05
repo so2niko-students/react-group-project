@@ -17,7 +17,7 @@ export default function PostDetail() {
     return (
         <div className="container mx-auto pt-6">
             <h1 className="text-3xl">{item.title}</h1>
-            <div className="mb-4 mt-2"><span className="mr-8">{item.authorName}</span><span>{item.dateOfCreation}</span></div>
+            <div className="mb-4 mt-2"><span className="mr-8">{item.authorName} {item.authorLastName}</span><span>{item.dateOfCreation}</span></div>
             <div>{item.description}</div>
         </div>
     )

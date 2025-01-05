@@ -12,6 +12,7 @@ export default function Home() {
         setIsLoading(true);
         async function getPosts() {
             const data = await getAllPosts();
+
             setItems(data);
             setIsLoading(false);
             toast('data is loaded')
