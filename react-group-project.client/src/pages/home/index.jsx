@@ -24,9 +24,9 @@ export default function Home() {
     
     return (
         <div className="container d-flex justify-content-center flex-column">
-            {loading && <p>Loading...</p>}
-            {error && <p className="text-danger">Error: {error}</p>}
-            {!loading && !error && <PostList items={posts} />}
+            {loading ? <p>Loading...</p> : null}
+            {error ? <p className="text-danger">Error: {error}</p> : null}
+            {!loading && !error ? <PostList items={posts} /> : null}
         </div>
     )
 }

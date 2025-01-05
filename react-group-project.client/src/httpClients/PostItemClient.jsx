@@ -1,14 +1,5 @@
 import axios from "axios";
 
-function getFullImageLink(relativeLink) {
-    if (!relativeLink)
-        return null;
-
-    const fullLink = `https://localhost:7281/${relativeLink}`;
-    return fullLink;
-}
-
-
 export async function getPosts() {
     let posts = null;
     let error = null;
@@ -22,7 +13,7 @@ export async function getPosts() {
             fullText: p.fullText,
             author: `${p.creator.name} ${p.creator.surName}`,
             createDateTime: p.createDateTime,
-            imageLink: getFullImageLink(p.imageLink)
+            imageLink: p.imageLink
         }));
 
         posts = formattedData;
@@ -46,7 +37,7 @@ export async function getPost(postId) {
             fullText: result.fullText,
             author: `${result.creator.name} ${result.creator.surName}`,
             createDateTime: result.createDateTime,
-            imageLink: getFullImageLink(result.imageLink)
+            imageLink: result.imageLink
         };
 
         post = formattedData;
@@ -59,6 +50,20 @@ export async function getPost(postId) {
 export async function addPost(data) {
     try {
             await axios.post(`postitem`, data, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+        return { success: true, error: null };
+
+    } catch (err) {
+        return { success: false, error: err.message };
+    }
+}
+
+export async function updatePost(data) {
+    try {
+        await axios.put(`postitem`, data, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }

@@ -1,13 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Button, Container, Alert } from "react-bootstrap";
+import getFullImageLink from "../helpers/LinkHelper.jsx";
 
-function CreatePostItemComponent({ onCreate }) {
+function EditPostItemComponent({ post, onEdit }) {
     const [title, setTitle] = useState("");
     const [shortDescription, setShortDescription] = useState("");
     const [fullText, setFullText] = useState("");
     const [imageFile, setImageFile] = useState(null);
     const [error, setError] = useState("");
     const [imagePreview, setImagePreview] = useState("");
+
+    useEffect(() => {
+        if (post) {
+            setTitle(post.title || "");
+            setShortDescription(post.shortDescription || "");
+            setFullText(post.fullText || "");
+            if (post.image) {
+                setImageFile(file);
+                setImagePreview(post.image);
+            }
+            else if (post.imageLink) {
+                setImagePreview(getFullImageLink(post.imageLink));
+            }
+        }
+    }, [post]);
 
     const handleImageChange = (event) => {
         const file = event.target.files[0];
@@ -25,19 +41,12 @@ function CreatePostItemComponent({ onCreate }) {
             return;
         }
 
-        onCreate({ title, shortDescription, fullText, imageFile });
-
-        setTitle("");
-        setShortDescription("");
-        setFullText("");
-        setImageFile(null);
-        setImagePreview("");
-        setError("");
+        onEdit({ title, shortDescription, fullText, imageFile });
     };
 
     return (
         <Container className="mt-4" style={{ maxWidth: "600px" }}>
-            <h4 className="mb-3">Create Post</h4>
+            <h4 className="mb-3">Edit Post</h4>
 
             {error ? <Alert variant="danger">{error}</Alert> : null}
 
@@ -72,17 +81,13 @@ function CreatePostItemComponent({ onCreate }) {
                     />
                 </Form.Group>
 
-                {/* Загрузка изображения */}
                 <Form.Group className="mb-3">
-                    <Form.Label>Upload Image</Form.Label>
-                    <div className="d-flex align-items-center">
-                        <Form.Control
-                            type="file"
-                            accept="image/*"
-                            onChange={handleImageChange}
-                            className="me-2"
-                        />
-                    </div>
+                    <Form.Label>Upload New Image (optional)</Form.Label>
+                    <Form.Control
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageChange}
+                    />
                     {imagePreview ? (
                         <div className="mt-3">
                             <img
@@ -100,11 +105,11 @@ function CreatePostItemComponent({ onCreate }) {
                     variant="primary"
                     className="mt-3"
                 >
-                    Create Post
+                    Save Changes
                 </Button>
             </Form>
         </Container>
     );
 }
 
-export default CreatePostItemComponent;
+export default EditPostItemComponent;

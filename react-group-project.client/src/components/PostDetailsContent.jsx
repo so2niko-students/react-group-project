@@ -1,11 +1,13 @@
 import { Card } from "react-bootstrap";
 import "./PostDetailsContent.css"
+import getFullImageLink from "../helpers/LinkHelper.jsx";
 
 export default function PostDetailsContent({ post }) {
+    const imageLink = getFullImageLink(post.imageLink);
     return (
         <Card className="mb-3 postDetails-card">
             {post.imageLink && (
-                <Card.Img variant="top" src={post.imageLink} alt={post.title} className="postDetails-cardImage" />
+                <Card.Img variant="top" src={imageLink} alt={post.title} className="postDetails-cardImage" />
             )}
             <Card.Body>
                 <Card.Title>{post.title}</Card.Title>

@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using react_group_project.Server.DatabaseProviders;
 using react_group_project.Server.Models;
 using react_group_project.Server.Requests;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace react_group_project.Server.Controllers
 {
@@ -37,7 +36,7 @@ namespace react_group_project.Server.Controllers
         }
 
         [HttpPost(Name = "AddPostItem")]
-        public async Task<IActionResult> AddPost(CreatePostRequest postRequest)
+        public async Task<IActionResult> Add(CreatePostRequest postRequest)
         {
 
             var post = new PostItem()
@@ -61,6 +60,44 @@ namespace react_group_project.Server.Controllers
             }
 
             _DataBaseContext.PostItems.Add(post);
+            await _DataBaseContext.SaveChangesAsync();
+
+            return Ok(post);
+        }
+
+        [HttpPut(Name = "EditPostItem")]
+        public async Task<IActionResult> Edit(EditPostRequest editRequest)
+        {
+            var post = _DataBaseContext.PostItems.First(x => x.Id == editRequest.Id);
+
+
+            if (post.Title == editRequest.Title &&
+                post.ShortDescription == editRequest.ShortDescription &&
+                post.FullText == editRequest.FullText &&
+                post.ImageLink == editRequest.ImageLink)
+            {
+                return Ok(post);
+            }
+
+            post.Title = editRequest.Title;
+            post.ShortDescription = editRequest.ShortDescription;
+            post.FullText = editRequest.FullText;
+
+            if (editRequest.Image != null)
+            {
+                var filePath = Path.Combine("wwwroot", "images", "postItems", $"{editRequest.Image.FileName}");
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await editRequest.Image.CopyToAsync(stream);
+                }
+
+                post.ImageLink = Path.Combine("images", "postItems", editRequest.Image.FileName);
+            }
+            else
+            {
+                post.ImageLink = editRequest.ImageLink;
+            }
+
             await _DataBaseContext.SaveChangesAsync();
 
             return Ok(post);

@@ -4,6 +4,7 @@ import Error from "./error";
 import Home from "./pages/home/index"
 import PostDetails from "./pages/post_detail/index"
 import CreatePostItem from "./pages/create_item/index"
+import EditPostItem from "./pages/edit_item/index"
 
 export const router= createBrowserRouter([
     {
@@ -20,8 +21,12 @@ export const router= createBrowserRouter([
                 element: <PostDetails />
             },
             {
-                path: "/create",
+                path: "/createPost",
                 element: <CreatePostItem />
+            },
+            {
+                path: "/editPost/:postId",
+                element: <EditPostItem />
             }
         ]
     }

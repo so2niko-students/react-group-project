@@ -1,7 +1,9 @@
 import './PostItem.css';
 import { Link } from "react-router-dom";
+import getFullImageLink from "../helpers/LinkHelper.jsx";
 
 export default function PostItem({ item = {} }) {
+    const imageLink = getFullImageLink(item.imageLink);
     return (
         <div className="card card-body row" style={{ margin: "10px" }}>
                 <div className="card-body row">
@@ -14,8 +16,9 @@ export default function PostItem({ item = {} }) {
                     </small>
                     </div>
                     <div className="col-4 d-flex justify-content-center align-items-center">
-                        <img src={item.imageLink} />
+                    <img src={imageLink} />
                     </div>
+                    <h6 className="text-primary"><Link to={`/editPost/${item.id}`}>Edit</Link></h6>
                 </div>
             </div>
     )
