@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { getAllPosts } from "../../services/posts";
 import PostItem from '../../components/post_item/post_item';
 import { ToastContainer, toast } from 'react-toastify';
 import Loader from '../../components/loader/loader';
+import { getAllPosts } from '../../services/post';
 
 export default function Home() {
     const [items, setItems] = useState([]);
