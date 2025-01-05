@@ -65,10 +65,10 @@ namespace react_group_project.Server.Controllers
             return Ok(post);
         }
 
-        [HttpPut(Name = "EditPostItem")]
-        public async Task<IActionResult> Edit(EditPostRequest editRequest)
+        [HttpPatch("{id}", Name = "EditPostItem")]
+        public async Task<IActionResult> Edit(int id, EditPostRequest editRequest)
         {
-            var post = _DataBaseContext.PostItems.First(x => x.Id == editRequest.Id);
+            var post = _DataBaseContext.PostItems.First(x => x.Id == id);
 
 
             if (post.Title == editRequest.Title &&

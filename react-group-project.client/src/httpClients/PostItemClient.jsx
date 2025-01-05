@@ -63,7 +63,7 @@ export async function addPost(data) {
 
 export async function updatePost(data) {
     try {
-        await axios.put(`postitem`, data, {
+        await axios.patch(`/postitem/${data.id}`, data, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }

@@ -1,6 +1,7 @@
 import { Card } from "react-bootstrap";
 import "./PostDetailsContent.css"
 import getFullImageLink from "../helpers/LinkHelper.jsx";
+import { Link } from "react-router-dom";
 
 export default function PostDetailsContent({ post }) {
     const imageLink = getFullImageLink(post.imageLink);
@@ -18,6 +19,7 @@ export default function PostDetailsContent({ post }) {
                     <small className="text-muted">
                         Date: {new Date(post.createDateTime).toLocaleDateString()} Time: {new Date(post.createDateTime).toLocaleTimeString()}
                     </small>
+                    <h6 className="text-primary"><Link to={`/editPost/${post.id}`}>Edit</Link></h6>
                 </div>
             </Card.Body>
         </Card>
