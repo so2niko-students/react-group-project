@@ -1,10 +1,32 @@
-import PostList from "../../components/PostList"
-import { items } from "../../data"
+import PostList from "../../components/PostList";
+import { getPosts } from "../../httpClients/PostItemClient.jsx";
+import { useState, useEffect } from "react";
 
 export default function Home() {
+    const [posts, setPosts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        async function getData() {
+            try {
+                setLoading(true);
+                let res = await getPosts();
+                setError(res.error);
+                setPosts(res.posts);
+            }
+            finally {
+                setLoading(false);
+            }
+        }
+        getData();
+    }, []);
+    
     return (
         <div className="container d-flex justify-content-center flex-column">
-            <PostList items={items} />
+            {loading ? <p>Loading...</p> : null}
+            {error ? <p className="text-danger">Error: {error}</p> : null}
+            {!loading && !error ? <PostList items={posts} /> : null}
         </div>
     )
 }
