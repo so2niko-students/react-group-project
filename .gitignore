@@ -65,3 +65,4 @@ build/
 .vs/
 obj/
 bin/
+wwwroot/
