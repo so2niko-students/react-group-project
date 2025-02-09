@@ -1,8 +1,7 @@
 import EditPostItemComponent from "../../components/EditPostItemComponent.jsx";
 import { updatePost, getPost } from "../../httpClients/PostItemClient.jsx";
 import { useState } from "React";
-import { useNavigate } from "react-router-dom";
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from "react-router-dom";
 
 function EditPostItem() {
     const { postId } = useParams();
