@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import PostItem from '../../components/post_item/post_item';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import Loader from '../../components/loader/loader';
 import { getAllPosts } from '../../services/post';
 
@@ -12,10 +12,11 @@ export default function Home() {
         setIsLoading(true);
         async function getPosts() {
             const data = await getAllPosts();
-
+            
             setItems(data);
             setIsLoading(false);
             toast('data is loaded')
+            console.log(data);
         }
         getPosts();
     }, []);
@@ -28,18 +29,5 @@ export default function Home() {
                         : items.map((item) => <PostItem key={item.id} item={item} />)
             }
         </div>
-        <ToastContainer
-            position="top-right"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick={false}
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="light"
-        />
-    </>
-    )
+    </>)
 }

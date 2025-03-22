@@ -19,11 +19,27 @@ export async function createPost(newPost) {
         return axios({
             method: 'post',
             url: POST_ITEMS,
-            data: newPost
+            data: newPost,
+            headers: {
+                 'Content-Type': 'multipart/form-data'
+            }
         });
     } catch (error) {
         console.error(error);
     }
+}
+
+export const sendFile = (file) => {
+    const fData = new FormData();
+    fData.append('files', file);
+    axios({
+        method: 'post',
+        url: POST_ITEMS,
+        data: fData,
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    }).then(r => console.log(r));
 }
 
 export async function getAllPosts() {

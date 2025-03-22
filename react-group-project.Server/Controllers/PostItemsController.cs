@@ -24,7 +24,8 @@ namespace react_group_project.Server.Controllers
                     AuthorName = "author name1",
                     AuthorLastName = "author lastName1",
                     DateOfCreation = "date of creation1",
-                    Img = "src/images/img1.jpg"
+                    ImgPath = "src/images/img1.jpg",
+                    Text = "Text44 Lorem Ipsum is simply dummy text of the printing and typesetting industry."
                 });
 
                 db.PostItems.Add(new PostItem
@@ -34,7 +35,8 @@ namespace react_group_project.Server.Controllers
                     AuthorName = "author name22",
                     AuthorLastName = "author lastName22",
                     DateOfCreation = "date of creation1",
-                    Img = "src/images/img1.jpg"
+                    ImgPath = "src/images/img1.jpg",
+                    Text = "Text55 Lorem Ipsum is simply dummy text of the printing and typesetting industry."
                 });
 
                 db.SaveChanges();
@@ -42,24 +44,34 @@ namespace react_group_project.Server.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<PostItem>> Get()
-        {
-            return await db.PostItems.ToListAsync();
-        }
+        public async Task<IEnumerable<PostItem>> Get() => await db.PostItems.ToListAsync();
 
         [HttpGet("{id}")]
-        public async Task<PostItem> Get(int id)
-        {
-            var item =  await db.PostItems.FirstOrDefaultAsync(x => x.Id == id);
-
-            return item;
-        }
+        public async Task<PostItem> Get(int id) => await db.PostItems.FirstOrDefaultAsync(x => x.Id == id);
 
         [HttpPost]
-        public async Task<PostItem> Post([FromBody] PostItem postItem)
+        public async Task<PostItem> Post(Req req)
         {
-            var result = db.PostItems.Add(postItem);
+            var path = Path.Combine("wwwroot", req.Picture?.FileName);
 
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                StreamWriter writer = new StreamWriter(stream);
+                await req.Picture.CopyToAsync(stream);
+            }
+
+            PostItem postItem = new PostItem
+            {
+                Title = req.Title,
+                Description = req.Description,
+                AuthorName = req.AuthorName,
+                AuthorLastName = req.AuthorLastName,
+                DateOfCreation = req.DateOfCreation,
+                ImgPath = req.Picture?.FileName,
+                Text = req.Text
+            };
+
+            var result = db.PostItems.Add(postItem);
             await db.SaveChangesAsync();
 
             return result.Entity;
