@@ -1,5 +1,6 @@
 import './post_item.css';
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { SERVER_URL } from '../../constants' 
 
 export default function PostItem({ item = {} }) {
     return (
@@ -15,7 +16,7 @@ export default function PostItem({ item = {} }) {
                     <div>{item.dateOfCreation}</div>
                 </div>
                 <div className="col-4 d-flex justify-content-center align-items-center">
-                    <img src={`https://localhost:7281/${item.imgPath}`} alt="" className="file-preview" />
+                    <img src={`${SERVER_URL}${item.imgPath}`} alt="" className="file-preview" />
                 </div>
             </div>
         </div>
